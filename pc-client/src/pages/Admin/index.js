@@ -1,0 +1,1 @@
+export{default} from './Admin'; //Exportación por defecto es Admin
