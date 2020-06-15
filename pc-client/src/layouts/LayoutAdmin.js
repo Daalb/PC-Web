@@ -4,7 +4,7 @@ export default function LayoutAdmin(){
 
     return(
         <Layout>
-            <h2>Menu Sider</h2>
+            <h2>Menu Sider Admin</h2>
             <div>
                 Contenido(Todos los componentes)
             </div>

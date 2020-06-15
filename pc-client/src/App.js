@@ -1,21 +1,35 @@
 import React from 'react';
-import Admin from './pages/Admin';
-import SignIn from './pages/Admin/SignIn'
-import Home from './pages/Home'
-import Contact from './pages/Contact'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import routes from './config/routes';
+import { removeFileItem } from 'antd/lib/upload/utils';
 
 //Esta es la raíz de la aplicación
 
 function App() {
   return (
-    <div>
-        <h1>Estamos en App.js</h1>
-        <Admin/>
-        <SignIn/>
-        <Home/>
-        <Contact/>
-    </div>
+   <Router>
+     <Switch>
+       {routes.map((route, index)=>(
+         <RouteWithSubRoutes key={index}{...route}/> //Va entre llaves porque es código Js
+       ))} 
+     </Switch>
+   </Router>
   );
 }
+
+function RouteWithSubRoutes(route){  
+  return (
+    <Route
+      path = {route.path}
+      exact = {route.exact}
+      render = {props=><route.component routes={route.routes} {...props}/>}
+    />  
+  );
+
+}/*Renderizar la ruta padre y pasarle las rutas hijas al componente. 
+  Esto permite renderizar varias rutas sin la necesidad de poner cada una en el Switch,
+  solo se cambia en el routes.js y por medio del bucle se renderizarán todas*/
+
+
 
 export default App;
