@@ -1,11 +1,18 @@
 //Es la importación del Layout del admin
 import LayoutAdmin from '../layouts/LayoutAdmin';
+//Import Layount para Cliente
+import LayoutBasic from '../layouts/LayoutBasic';
 
-//Admin Page
+//Admin Pages
 import AdminHome from '../pages/Admin'; //Como es exportación default le puedo poner cualquier nombre
 import AdminSignIn from '../pages/Admin/SignIn';
 
+//Client Pages
+import Contact from '../pages/Contact';
+import Home from '../pages/Home';
+
 const routes = [//Es el sistema de rutas, el array contiene todas las rutas
+    //Esto es un array de objetos, la primera pos son las rutas de admin la segunda de users
     {
         path: "/admin",
         component: LayoutAdmin,
@@ -22,10 +29,27 @@ const routes = [//Es el sistema de rutas, el array contiene todas las rutas
                 exact: true
             }
         ]
+    },
+    {
+        path: "/",//Aquí pasa lo mismo con el path, es falso porque dentro de este tenemos otras rutas
+        exact: false,
+        component: LayoutBasic,
+        routes:[
+            {
+                path: "/",
+                exact: true,
+                component: Home
+            },
+            {
+                path :"/contact",
+                exact: true,
+                component: Contact
+            }
+        ]
     }
 ];
 
-/*En resumen, primero se carga el comonente que tiene el Layout, es exact false porque tiene
+/*En resumen, primero se carga el componente que tiene el Layout, es exact false porque tiene
     subrutas, luego estando en esa ruta que tiene el componente LayoutAdmin, tengo otras dos
     rutas, esas si deben ser exact true porque es necesario que se mantenga el componente LayoutAdmin
     puesto que aun estamos dentro de la ruta admin*/
