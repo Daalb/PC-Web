@@ -11,6 +11,9 @@ import AdminSignIn from '../pages/Admin/SignIn';
 import Contact from '../pages/Contact';
 import Home from '../pages/Home';
 
+//Errors
+import Error404 from '../pages/Error404';
+
 const routes = [//Es el sistema de rutas, el array contiene todas las rutas
     //Esto es un array de objetos, la primera pos son las rutas de admin la segunda de users
     {
@@ -27,6 +30,9 @@ const routes = [//Es el sistema de rutas, el array contiene todas las rutas
                 path: "/admin/login",
                 component: AdminSignIn,
                 exact: true
+            },
+            {
+                component: Error404//Siempre va de ultimo y va sin path porque no sabemos que path pondrá el user   
             }
         ]
     },
@@ -44,6 +50,9 @@ const routes = [//Es el sistema de rutas, el array contiene todas las rutas
                 path :"/contact",
                 exact: true,
                 component: Contact
+            },
+            {
+                component: Error404
             }
         ]
     }
