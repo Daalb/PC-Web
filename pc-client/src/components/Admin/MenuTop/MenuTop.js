@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
-import { MenuUnfoldOutlined } from '@ant-design/icons';
+import { MenuUnfoldOutlined,PoweroffOutlined } from '@ant-design/icons';
 import './MenuTop.scss';
 import PCLogo from '../../../assets/img/png/logo-pcuninorte.png'
 
@@ -16,6 +16,11 @@ export default function MenuTop(){
                 />
                 <Button type="link" onClick={()=>console.log('Click hecho')}>
                     <MenuUnfoldOutlined />
+                </Button>
+            </div>
+            <div className="menu-top__right">
+                <Button type="link" onClick={()=>console.log('Desconexion')}>
+                    <PoweroffOutlined />
                 </Button>
             </div>
         </div>
