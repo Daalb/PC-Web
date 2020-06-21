@@ -21,7 +21,7 @@ export default function MenuTop(props){
                     />
                 </Link>
                 <Button type="link" onClick={() => setMenuCollapsed(!menuCollapsed)}>
-                    {menuCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                    {menuCollapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>}
                 </Button>
             </div>
             <div className="menu-top__right">

@@ -17,9 +17,11 @@
     
     &__left{
         &-logo{
+            display: inline;
             width: 50px;
             padding: 0 10px;
         }
+        
     }
 
     &__right{
