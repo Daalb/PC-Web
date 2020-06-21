@@ -13,7 +13,6 @@ mongoose.connect(`mongodb://${IP_SERVER}:${PORT_DB}/partnersBD`,//Puerto en el q
         throw err;
     }else{
         console.log("La conexión a la base de datos fue exitosa");
-
         app.listen(PORT_SERVER,()=>{
             console.log("#########################");
             console.log("########API REST########");

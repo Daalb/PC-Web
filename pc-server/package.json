@@ -14,7 +14,6 @@
     "jwt-simple": "^0.5.6",
     "moment": "^2.24.0",
     "mongoose": "^5.9.6",
-    "mongose": "^0.0.2-security",
     "nodemon": "^2.0.2"
   },
   "scripts": {
