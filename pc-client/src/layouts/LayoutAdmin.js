@@ -22,7 +22,7 @@ export default function LayoutAdmin(props){
                 <Content className="layout-admin__content">
                     <LoadRoutes routes={routes}/>
                 </Content>
-                <Footer className="layout-admin__footer">
+                <Footer style={{ textAlign: 'center' }} className="layout-admin__footer">
                     Partners Campus Uninorte
                 </Footer>
             </Layout>

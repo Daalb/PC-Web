@@ -14,7 +14,7 @@ export default function LayoutBasic({routes}){
                 <Content>
                     <LoadRoutes routes={routes}/>   
                 </Content>
-                <Footer>
+                <Footer style={{ textAlign: 'center' }}>
                     Partners Campus Uninorte
                 </Footer>
             </Layout>
