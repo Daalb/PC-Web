@@ -14,8 +14,8 @@
 
         &__logo{
             padding: 60px 20px;
-            &__img{
-                width: 200px;
+            img{
+                width: 180px;
             }
         }
 
@@ -24,9 +24,8 @@
 
             .ant-tabs{
                 width: 90vw;
-
                 @media (min-width: $media-breackpoint-up-lg){
-                    widht:auto;
+                    width: auto;
                 }
             }
 
@@ -46,7 +45,8 @@
                 border-top: 4px solid $border-grey !important;
                 border-radius: 0 !important;
                 margin: 0 !important;
-                @media (min-widht: $media-breackpoint-up-lg){
+                
+                @media (min-width: $media-breackpoint-up-lg){
                     widht: 220px;
                     font-size: 0em + 23px/ $defaultFontSize;
                 }
