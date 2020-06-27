@@ -6,7 +6,7 @@ export function minLengthValidation(inputData, minLength){
     if (value.length >= minLength) {
         inputData.classList.add('success');
         return true;
-    }else {
+    } else {
         inputData.classList.add('error');
         return false;
     }

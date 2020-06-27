@@ -1,6 +1,12 @@
 @import './scss/index.scss';
-.App{
-    h1{
-        color: $primary-color;
-    }
+
+.success{
+    border: 1px solid $success !important;
+    background-color: $background-success;
+    
+}
+
+.error{
+    border: 1px solid $error !important;
+    background-color: $background-error;
 }

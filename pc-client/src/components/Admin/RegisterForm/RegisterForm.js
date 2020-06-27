@@ -39,7 +39,7 @@ export default function RegisterForm(){
     };
 
     const inputValidation = e => {
-        const { type, name, } = e.target;
+        const { type, name } = e.target;
         if (type === 'email') {
             setFormValid({
                 ...formValid,
@@ -62,8 +62,24 @@ export default function RegisterForm(){
         }
     }
 
-    const register = () => {
-        console.log(formValid);
+    const register = e => {
+        const { email, password, repeatPassword, privacyPolicy } = formValid;
+        const passwordVal = inputs.password;
+        const repeatPasswordVal = inputs.repeatPassword;
+
+        if (!inputs.name || !passwordVal || !repeatPasswordVal || !inputs.privacyPolicy) {
+            notification['error']({
+                message: "Todos los campos son obligatorios"
+            });
+        } else {
+            if (passwordVal !== repeatPasswordVal) {
+                notification['error']({
+                    message: "Las contraseñas tienen que ser iguales"
+                });
+            } else {
+               //TO DO: Conectar con API y registrar usuario
+            }
+        }
     };
 
 
@@ -101,6 +117,7 @@ export default function RegisterForm(){
                     name="email" 
                     placeholder="Correo electronico" 
                     className="register-form__input"
+                    onChange={inputValidation}
                     value={inputs.email}
                 />
             </Form.Item>

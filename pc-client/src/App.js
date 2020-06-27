@@ -3,6 +3,8 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import routes from './config/routes';
 import { removeFileItem } from 'antd/lib/upload/utils';
 
+import './App.scss';
+
 //Esta es la raíz de la aplicación
 
 function App() {
