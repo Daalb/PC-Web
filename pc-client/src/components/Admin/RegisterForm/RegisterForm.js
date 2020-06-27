@@ -78,6 +78,9 @@ export default function RegisterForm(){
                 });
             } else {
                //TO DO: Conectar con API y registrar usuario
+               notification['success']({
+                   message: "Cuenta creada correctamente"
+               })
             }
         }
     };
