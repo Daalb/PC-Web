@@ -6,6 +6,7 @@ import { UserOutlined, LockOutlined, NumberOutlined, MailOutlined, PhoneOutlined
 import './RegisterForm.scss';
 
 import { emailValidation, minLengthValidation } from '../../../utils/formValidation';
+import { signUpApi } from '../../../api/user';
 
 export default function RegisterForm(){
 
@@ -77,10 +78,7 @@ export default function RegisterForm(){
                     message: "Las contraseñas tienen que ser iguales"
                 });
             } else {
-               //TO DO: Conectar con API y registrar usuario
-               notification['success']({
-                   message: "Cuenta creada correctamente"
-               })
+               const result = signUpApi(inputs);
             }
         }
     };
