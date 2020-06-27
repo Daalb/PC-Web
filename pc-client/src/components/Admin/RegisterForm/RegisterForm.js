@@ -11,6 +11,8 @@ import { signUpApi } from '../../../api/user';
 export default function RegisterForm(){
 
     const [inputs, setInputs] = useState({
+        nombre: "",
+        lastName: "",
         email:"",
         password:"",
         repeatPassword:"",
@@ -20,6 +22,8 @@ export default function RegisterForm(){
     });
 
     const [formValid, setFormValid] = useState({
+        nombre: false,
+        lastName: false,
         email: false,
         password: false,
         repeatPassword: false,
@@ -28,7 +32,7 @@ export default function RegisterForm(){
         privacyPolicy: false
     });
     
-    //e es "event"
+    //Función para permitir escribir (cambiar el estado) de los inputs
     const changeForm = e =>{
         if (e.target.name === "privacyPolicy"){
             setInputs({
@@ -68,11 +72,11 @@ export default function RegisterForm(){
     }
 
     const register = e => {
-        const { email, password, repeatPassword, phone, carrera, privacyPolicy } = formValid;
+        const { nombre, lastName, email, password, repeatPassword, phone, carrera, privacyPolicy } = formValid;
         const passwordVal = inputs.password;
         const repeatPasswordVal = inputs.repeatPassword;
 
-        if (!inputs.nombre || !passwordVal || !repeatPasswordVal || !inputs.privacyPolicy || !inputs.carrera || !inputs.phone) {
+        if (!inputs.nombre || !passwordVal || !repeatPasswordVal || !inputs.privacyPolicy || !inputs.carrera || !inputs.phone || !inputs.lastName) {
             notification['error']({
                 message: "Todos los campos son obligatorios"
             });
@@ -82,6 +86,7 @@ export default function RegisterForm(){
                     message: "Las contraseñas tienen que ser iguales"
                 });
             } else {
+                console.log(inputs)
                const result = signUpApi(inputs);
             }
         }
@@ -107,11 +112,11 @@ export default function RegisterForm(){
                 <Input 
                     prefix={<UserOutlined style={{color:"rgba(0,0,0,0.25)"}} />}
                     type="text" 
-                    name="lastname" 
+                    name="lastName" 
                     placeholder="Apellidos" 
                     className="register-form__input"
                     onChange={inputValidation}
-                    value={inputs.lastname}
+                    value={inputs.lastName}
                 />
             </Form.Item>
 

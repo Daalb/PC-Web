@@ -11,7 +11,7 @@ export function signUpApi(data){
         }
     };
    
-    console.log(data);
+   
 
    fetch(url,params).then(response => { 
         console.log(response); 
