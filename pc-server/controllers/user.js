@@ -1,18 +1,22 @@
 const bcrypt = require("bcrypt-nodejs");
 const User = require("../models/user");
 
-async function signUp(req, res){
+function signUp(req, res){
     const user = new User();
 
-    const{name, lastName, email, password, repeatPassword} = req.body;
+    const{ nombre, lastName, email, password, repeatPassword, phone, carrera } = req.body;
 
     //Asignaciones al modelo
-    user.name = name;
+    user.nombre = nombre;
     user.lastName = lastName; 
     user.email = email;
+    user.phone = phone;
+    user.carrera = carrera;
     user.role = "admin";
     user.active = false;
 
+    console.log(req.body);
+    
     if (!password || !repeatPassword){
         res.status(404).send({ message: "Las contraseñas son obligatorias."});
     } else {

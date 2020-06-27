@@ -14,6 +14,8 @@ export default function RegisterForm(){
         email:"",
         password:"",
         repeatPassword:"",
+        phone:"",
+        carrera:"",
         privacyPolicy:false
     });
 
@@ -21,6 +23,8 @@ export default function RegisterForm(){
         email: false,
         password: false,
         repeatPassword: false,
+        phone: false,
+        carrera: false,
         privacyPolicy: false
     });
     
@@ -64,11 +68,11 @@ export default function RegisterForm(){
     }
 
     const register = e => {
-        const { email, password, repeatPassword, privacyPolicy } = formValid;
+        const { email, password, repeatPassword, phone, carrera, privacyPolicy } = formValid;
         const passwordVal = inputs.password;
         const repeatPasswordVal = inputs.repeatPassword;
 
-        if (!inputs.name || !passwordVal || !repeatPasswordVal || !inputs.privacyPolicy) {
+        if (!inputs.nombre || !passwordVal || !repeatPasswordVal || !inputs.privacyPolicy || !inputs.carrera || !inputs.phone) {
             notification['error']({
                 message: "Todos los campos son obligatorios"
             });
@@ -91,11 +95,11 @@ export default function RegisterForm(){
                 <Input 
                     prefix={<UserOutlined style={{color:"rgba(0,0,0,0.25)"}} />}
                     type="text" 
-                    name="name" 
+                    name="nombre" 
                     placeholder="Nombres" 
                     className="register-form__input"
                     onChange={inputValidation}
-                    value={inputs.name}
+                    value={inputs.nombre}
                 />
             </Form.Item>
 
