@@ -71,7 +71,7 @@ export default function RegisterForm(){
         }
     }
 
-    const register = e => {
+    const register = async e => {
         const { nombre, lastName, email, password, repeatPassword, phone, carrera, privacyPolicy } = formValid;
         const passwordVal = inputs.password;
         const repeatPasswordVal = inputs.repeatPassword;
@@ -86,12 +86,52 @@ export default function RegisterForm(){
                     message: "Las contraseñas tienen que ser iguales"
                 });
             } else {
-                console.log(inputs)
-               const result = signUpApi(inputs);
+               const result = await signUpApi(inputs);
+               if (!result.ok) {
+                   notification['error']({
+                       message: result.message
+                   });
+               } else {
+                   notification['success']({
+                       message: result.message
+                   });
+                   resetForm();
+               }
             }
         }
     };
 
+
+    const resetForm = () =>{
+        const inputs = document.getElementsByTagName('input');
+
+        for (let i = 0; i< inputs.length; i++){
+            inputs[i].classList.remove("success");
+            inputs[i].classList.remove("error");
+        }
+
+        setInputs({
+            nombre: "",
+            lastName: "",
+            email:"",
+            password:"",
+            repeatPassword:"",
+            phone:"",
+            carrera:"",
+            privacyPolicy:false
+        });
+        
+        setFormValid({
+            nombre: false,
+            lastName: false,
+            email: false,
+            password: false,
+            repeatPassword: false,
+            phone: false,
+            carrera: false,
+            privacyPolicy: false
+        });     
+    }
 
     return(
         <Form className="register-form" onFinish={register} onChange={changeForm}>
