@@ -7,6 +7,7 @@ import AdminSignIn from '../pages/Admin/SignIn';
 
 import "./LayoutAdmin.scss";
 
+
 export default function LayoutAdmin(props){
     
     const{ routes } = props;
@@ -14,6 +15,8 @@ export default function LayoutAdmin(props){
     const { Header,Content,Footer } = Layout; 
 
     const user = null;
+        
+    
 
     if (!user) {//Mientras la variable sea null(no registrado),redirecciona a login
         return(

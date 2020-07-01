@@ -72,7 +72,7 @@ export default function RegisterForm(){
     }
 
     const register = async e => {
-        const { nombre, lastName, email, password, repeatPassword, phone, carrera, privacyPolicy } = formValid;
+      //  const { nombre, lastName, email, password, repeatPassword, phone, carrera, privacyPolicy } = formValid;
         const passwordVal = inputs.password;
         const repeatPasswordVal = inputs.repeatPassword;
 
