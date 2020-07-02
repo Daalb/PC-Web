@@ -20,34 +20,37 @@ export default function LayoutAdmin(props){
   //  const user = null;
         
     
-
-    if (!user) {//Mientras la variable sea null(no registrado),redirecciona a login
+    //Loading false es que terminó de cargar//True no ha acabado
+    if (!user && !isLoading) {//Mientras la variable sea null(no registrado),redirecciona a login
         return(
             <>
                 <Route path ="/admin/login" component = {AdminSignIn}/>
                 <Redirect to ="/admin/login"/>
             </>
-        )
-
+        )   
     }
     
-    return(
-        <Layout>
-            <MenuSider menuCollapsed ={menuCollapsed}/>
-            <Layout className="layout-admin" style={{ marginLeft: menuCollapsed ? "80px" : "200px"}}>
-                <Header className="layout-admin__header">
-                    <MenuTop menuCollapsed ={menuCollapsed} 
-                    setMenuCollapsed = {setMenuCollapsed}/>
-                </Header>
-                <Content className="layout-admin__content">
-                    <LoadRoutes routes={routes}/>
-                </Content>
-                <Footer style={{ textAlign: 'center' }} className="layout-admin__footer">
-                    Partners Campus Uninorte
-                </Footer>
+    if(user && !isLoading) {//Usuario logeado
+        return(
+            <Layout>
+                <MenuSider menuCollapsed ={menuCollapsed}/>
+                <Layout className="layout-admin" style={{ marginLeft: menuCollapsed ? "80px" : "200px"}}>
+                    <Header className="layout-admin__header">
+                        <MenuTop menuCollapsed ={menuCollapsed} 
+                        setMenuCollapsed = {setMenuCollapsed}/>
+                    </Header>
+                    <Content className="layout-admin__content">
+                        <LoadRoutes routes={routes}/>
+                    </Content>
+                    <Footer style={{ textAlign: 'center' }} className="layout-admin__footer">
+                        Partners Campus Uninorte
+                    </Footer>
+                </Layout>
             </Layout>
-        </Layout>
-    );
+        );
+    }
+
+    return null;    
 }
 
 function LoadRoutes({routes}){
