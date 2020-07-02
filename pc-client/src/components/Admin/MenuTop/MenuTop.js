@@ -4,11 +4,17 @@ import { Link } from 'react-router-dom';
 import { MenuUnfoldOutlined,PoweroffOutlined,MenuFoldOutlined } from '@ant-design/icons';
 import './MenuTop.scss';
 import PCLogo from '../../../assets/img/png/logo-pcuninorte.png'
+import { logout } from '../../../api/auth'; 
 
 
 export default function MenuTop(props){
     console.log(props); 
     const {menuCollapsed, setMenuCollapsed} = props;
+    const logoutUser = () =>{
+        logout();
+        window.location.reload();        
+    }
+
     return (
         <div className="menu-top">
             <div className="menu-top__left">
@@ -25,7 +31,7 @@ export default function MenuTop(props){
                 </Button>
             </div>
             <div className="menu-top__right">
-                <Button type="link" onClick={()=>console.log('Desconexion')}>
+                <Button type="link" onClick={logoutUser}>
                     <PoweroffOutlined />
                 </Button>
             </div>
