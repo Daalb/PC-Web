@@ -4,6 +4,7 @@ import {Layout} from "antd";//Nos traemos un layout de la libreria de css antd
 import MenuTop from '../components/Admin/MenuTop';
 import MenuSider from '../components/Admin/MenuSider';
 import AdminSignIn from '../pages/Admin/SignIn';
+import useAuth from '../hooks/useAuth';
 
 import "./LayoutAdmin.scss";
 
@@ -13,8 +14,10 @@ export default function LayoutAdmin(props){
     const{ routes } = props;
     const [menuCollapsed, setMenuCollapsed] = useState(false);
     const { Header,Content,Footer } = Layout; 
-
-    const user = null;
+    
+    //console.log(useAuth());
+   const { user, isLoading } = useAuth();
+  //  const user = null;
         
     
 
