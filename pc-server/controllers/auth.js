@@ -1,4 +1,4 @@
-import { locals } from '../app';
+//import { locals } from '../app';
 
 const jwt = require('../services/jwt');
 const moment  = require('moment');
