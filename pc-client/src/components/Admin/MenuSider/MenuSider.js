@@ -19,16 +19,9 @@ export default function MenuSider(props){
                </Menu.Item>
                 {/*menu-web será Planear reunión*/}
                <Menu.Item key="2">
-                   <Link to="/admin/menu-web">
-                        <TeamOutlined />
-                        <span className="nav-text">Menu Web</span>
-                   </Link>
-               </Menu.Item>
-
-               <Menu.Item key="3">
-                   <Link to="/admin/admin-attendance">
+                   <Link to="/admin/users">
                         <SolutionOutlined />
-                        <span className="nav-text">Gestión Asistencias</span>
+                        <span className="nav-text">Gestión de Usuarios</span>
                    </Link>
                </Menu.Item>
            </Menu>
