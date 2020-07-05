@@ -82,11 +82,21 @@ function singIn(req,res){
            }
        }
    })
-   console.log(params);
+  
    
 }
 
+function getUsers(req,res){
+    User.find().then(users =>{
+        if (!users) {
+            res.status(404).send({message: "No se ha encontrado ningún usuario."})
+        } else {
+            res.status(200).send({users})
+        }
+    }); 
+}
 module.exports = {
     signUp,
-    singIn
+    singIn,
+    getUsers
 };
