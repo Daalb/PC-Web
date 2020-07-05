@@ -39,9 +39,9 @@ export default function ListUsers(props){
 function UsersActive(props){
     const { usersActive, setIsVisibleModal } = props;
 
-    const visibleModal = () =>{
+    /*const visibleModal = () =>{
         setIsVisibleModal(true);
-    }
+    }*/
 
     return(
        <List
@@ -53,7 +53,7 @@ function UsersActive(props){
                 actions={[
                     <Button
                         type='primary'
-                        onClick={()=>visibleModal()}
+                        onClick={()=>setIsVisibleModal(true)}
                     >  
                         <EditOutlined />
                     </Button>,
