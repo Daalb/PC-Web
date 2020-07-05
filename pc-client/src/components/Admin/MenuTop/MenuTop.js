@@ -8,7 +8,7 @@ import { logout } from '../../../api/auth';
 
 
 export default function MenuTop(props){
-    console.log(props); 
+   
     const {menuCollapsed, setMenuCollapsed} = props;
     const logoutUser = () =>{
         logout();
