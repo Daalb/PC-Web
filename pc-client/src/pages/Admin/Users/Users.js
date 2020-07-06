@@ -14,10 +14,10 @@ export default function Users(){
 
     useEffect(() => {
         getUsersActiveApi(token,true).then(response => {
-           setUsersActive(response);
+           setUsersActive(response.users);
         });
         getUsersActiveApi(token,false).then(response => {
-            setUsersInactive(response);
+            setUsersInactive(response.users);
          });
     },[token]);
 

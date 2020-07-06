@@ -1,3 +1,22 @@
 .list-users{
-    
+
+    &__switch{
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+
+        button {
+            margin-right: 20px;
+        }
+    }
+
+    .users-active{
+        background-color: #fff;
+        padding: 10px 20px;
+
+        .ant-list-item-meta{
+            display: flex;
+            align-items: center;
+        }
+    }
 }
