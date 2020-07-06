@@ -13,7 +13,8 @@ const UserSchema = Schema({
     phone: String,
     carrera: String,
     role: String,
-    active: Boolean
+    active: Boolean,
+    avatar: String
 });
 
 module.exports = mongoose.model("User",UserSchema);
