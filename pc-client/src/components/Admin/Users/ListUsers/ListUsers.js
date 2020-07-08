@@ -1,8 +1,10 @@
 import React,{ useState } from 'react';
 import { Switch, List, Avatar, Button } from 'antd';
 import { EditOutlined, StopOutlined, DeleteOutlined, CheckOutlined } from '@ant-design/icons';
+
 import NoAvatar from '../../../../assets/img/png/no-avatar.png';
 import Modal from '../../../Modal';
+import EditUserForm from '../EditUserForm/EditUserForm';
 
 import './ListUsers.scss';
 
@@ -10,6 +12,9 @@ export default function ListUsers(props){
     const { usersActive, usersInactive } = props;
     const [viewUsersActive,setViewUsersActive] = useState(true); 
     const [isVisibleModal,setIsVisibleModal] = useState(false);
+    const [modalTitle, setModalTitle] = useState("");
+    const [modalContent, setModalContent] = useState("");
+    
     
     //console.log(usersActive);
     
@@ -26,24 +31,33 @@ export default function ListUsers(props){
                     {viewUsersActive ? "Usuarios Activos" : "Usuarios Inactivos"}
                 </span>
             </div>
-            {viewUsersActive ? <UsersActive usersActive={usersActive} setIsVisibleModal={setIsVisibleModal}/> : <UsersInactive usersInactive={usersInactive}/> }
+            {viewUsersActive ? <UsersActive 
+            usersActive={usersActive} 
+            setIsVisibleModal={setIsVisibleModal}
+            setModalTitle={setModalTitle}
+            setModalContent={setModalContent}
+            
+            /> : <UsersInactive usersInactive={usersInactive}/> }
+
             <Modal
-                title="Mi modal"
+                title= {modalTitle} 
                 isVisible={isVisibleModal}
                 setIsVisible={setIsVisibleModal}
-            > XD </Modal>
+            > {modalContent} </Modal>
         </div>
     );
 }
 
 function UsersActive(props){
-    const { usersActive, setIsVisibleModal } = props;
+    const { usersActive, setIsVisibleModal, setModalTitle, setModalContent } = props;
 
-    /*const visibleModal = () =>{
+    const editUser = (user) =>{
         setIsVisibleModal(true);
-    }*/
+        setModalTitle(`Editar ${user.nombre ? user.nombre : "..."} ${user.lastName ? user.lastName : "..."}`);
+        setModalContent(<EditUserForm user={user}/>);
+    }
 
-    return(
+    return( 
        <List
         className='users-active'
         itemLayout='horizontal'
@@ -53,7 +67,7 @@ function UsersActive(props){
                 actions={[
                     <Button
                         type='primary'
-                        onClick={()=>setIsVisibleModal(true)}
+                        onClick={()=>editUser(user)}
                     >  
                         <EditOutlined />
                     </Button>,
