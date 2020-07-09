@@ -1,7 +1,14 @@
+//Packages
 const bcrypt = require("bcrypt-nodejs");
+const fs = require("fs");
+const path = require("path");
+
+//Services
 const jwt = require("../services/jwt");
+
+//Modles
 const User = require("../models/user");
-const user = require("../models/user");
+//const user = require("../models/user");
 
 function signUp(req, res){
     const user = new User();
@@ -108,10 +115,58 @@ function getUsersActive(req,res){
     }); 
 }
 
+function uploadAvatar(req,res){
+    const params = req.params;
+
+    User.findById({_id: params.id}, (err, userData) => {
+         if (err) {
+             res.status(500).send({message: "Error del servidor."});
+         } else {
+             if (!userData) {
+                 res.status(404).send({message: "No se ha encontrado ningún usuario"});
+             } else {
+                let user = userData;
+                if (req.files) {
+                    let filePath = req.files.avatar.path;
+                    let fileSplit = filePath.split("\\");
+                    let fileName = fileSplit[2];//Obtener el nombre(id) de la imagen
+                    console.log(fileName);
+                    
+
+                    let extSplit = fileName.split("."); //Obtener la extensión
+                    let fileExt = extSplit[1];
+
+                    if (fileExt !== "png" && fileExt !== "jpg") {
+                        res.status(400).send({message: 
+                            "La extensión de la imagen no es valida. (Extenciones permitidas: .png y .jpg)"});
+                    } else {
+                        user.avatar = fileName;
+                        User.findByIdAndUpdate({_id: params.id}, user, (err, userResult) =>{
+                            if (err) {
+                                res.status(500).send({message: "Error de servidor."});
+                            } else {
+                                if(!userResult) {
+                                    res.status(404).send({message: "No se ha encontrado nigún usuario."})
+                                } else {
+                                    res.status(200).send({avatarName: fileName});
+
+                                }
+                            }
+                        });
+                    }
+                }
+                
+             }
+         }
+    })
+    
+}
+
 module.exports = {
     signUp,
     singIn,
     getUsers,
-    getUsersActive
+    getUsersActive,
+    uploadAvatar
 
 };
