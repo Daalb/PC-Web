@@ -143,6 +143,7 @@ function EditForm(props){
                             defaultValue={userData.role}
                         >
                             <Option value="admin"> Administrador </Option>
+                            <Option value="volunteer"> Voluntario </Option>
                         </Select>
                     </Form.Item>      
                 </Col>
@@ -153,23 +154,24 @@ function EditForm(props){
                     <Form.Item>
                         <Input
                             prefix= {<FileOutlined />}
+                            type="password"
                             placeholder="Contraseña"
-                            defaultValue={userData.password}
-                            onChange={e => setUserData({...userData, carrera: e.target.value})}
+                            onChange={e => setUserData({...userData, password: e.target.value})}
                         />
                     </Form.Item>
                 </Col>
+
                 <Col span={12}>
                     <Form.Item>
-                        <Select
-                            placeholder="Selecciona un rol"
-                            onChange={ e => setUserData({...userData, role: e}) }
-                            defaultValue={userData.role}
-                        >
-                            <Option value="admin"> Administrador </Option>
-                        </Select>
-                    </Form.Item>      
+                        <Input
+                            prefix= {<FileOutlined />}
+                            type="password"
+                            placeholder="Repetir contraseña"
+                            onChange={e => setUserData({...userData, repeatPassword: e.target.value})}
+                        />
+                    </Form.Item>
                 </Col>
+               
             </Row>
 
             <Form.Item>
