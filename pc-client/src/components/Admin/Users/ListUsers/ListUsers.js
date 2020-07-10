@@ -1,10 +1,11 @@
-import React,{ useState } from 'react';
+import React,{ useState, useEffect } from 'react';
 import { Switch, List, Avatar, Button } from 'antd';
 import { EditOutlined, StopOutlined, DeleteOutlined, CheckOutlined } from '@ant-design/icons';
 
 import NoAvatar from '../../../../assets/img/png/no-avatar.png';
 import Modal from '../../../Modal';
 import EditUserForm from '../EditUserForm/EditUserForm';
+import { getAvatarApi } from '../../../../api/user';
 
 import './ListUsers.scss';
 
@@ -48,7 +49,7 @@ export default function ListUsers(props){
     );
 }
 
-function UsersActive(props){
+function UsersActive(props){//Renderiza varios usuarios
     const { usersActive, setIsVisibleModal, setModalTitle, setModalContent } = props;
 
     const editUser = (user) =>{
@@ -99,6 +100,24 @@ function UsersActive(props){
         )}
        />
     );
+}
+
+function UserActive(props){//Renderiza un UNICO usuario
+    const {user, editUser} = props;
+    const [avatar, setAvatar] = useState(null);
+
+    useEffect(()=>{
+        if (user.avatar) {
+            getAvatarApi(user.avatar).then(response =>{
+                setAvatar(response);
+            })
+        } else {
+            setAvatar(null);
+        }
+    },[user])
+
+    return 
+
 }
 
 function UsersInactive(props){
