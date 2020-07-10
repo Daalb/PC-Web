@@ -115,7 +115,7 @@ function getUsersActive(req,res){
     }); 
 }
 
-function uploadAvatar(req,res){
+function uploadAvatar(req,res){//Subir avatar al server
     const params = req.params;
 
     User.findById({_id: params.id}, (err, userData) => {
@@ -162,7 +162,7 @@ function uploadAvatar(req,res){
     
 }
 
-function getAvatar(req,res){
+function getAvatar(req,res){//Obtener avatar del server
    const avatarName = req.params.avatarName;
    const filePath = "./uploads/avatar/" + avatarName;
 
@@ -176,12 +176,31 @@ function getAvatar(req,res){
     
 }
 
+function updateUser(req,res){
+    const userData = req.body;
+    const params = req.params;//Parametros que vienen en la url
+
+    User.findByIdAndUpdate({_id: params.id}, userData, (err, userUpdate) => {
+        if (err) {
+            res.status(500).send({message: "Error del servidor"});
+        } else {
+            if (!userUpdate) {
+                res.status(404).send({message: "No se ha encontrado ningún usuario"});
+            } else {
+                res.status(200).send({message: "Usuario actualizado correctamente"});
+            }
+        }
+    })
+    
+}
+
 module.exports = {
     signUp,
     singIn,
     getUsers,
     getUsersActive,
     uploadAvatar,
-    getAvatar
+    getAvatar,
+    updateUser
 
 };
