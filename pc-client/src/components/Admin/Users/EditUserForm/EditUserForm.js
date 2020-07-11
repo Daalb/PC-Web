@@ -56,13 +56,17 @@ export default function EditUserForm(props){
     const updateUser = e => {
         const token = getAccessTokenApi();
         let userUpdate = userData;
+        
         if (userUpdate.password || userUpdate.repeatPassword) {
             if(userUpdate.password !== userUpdate.repeatPassword) {
                 notification["error"]({
                     message: "Las contraseñas tienen que ser iguales"
-                })
+                });
+                return;
+            } else {
+                delete userUpdate.repeatPassword;
             }
-            return;
+           
         }
 
         if (!userUpdate.nombre || !userUpdate.lastName || !userUpdate.email) {
