@@ -177,7 +177,8 @@ function getAvatar(req,res){//Obtener avatar del server
 }
 
 function updateUser(req,res){
-    const userData = req.body;
+    let userData = req.body;
+    userData.email = req.body.email.toLowerCase();
     const params = req.params;//Parametros que vienen en la url
 
     User.findByIdAndUpdate({_id: params.id}, userData, (err, userUpdate) => {
