@@ -145,7 +145,7 @@ function UserInactive(props){
             setAvatar(null);
         }
     },[user]);
-
+ //Esto es un comentario de prueba para ver si se actualiza
     return(
         <List.Item
             actions={[
