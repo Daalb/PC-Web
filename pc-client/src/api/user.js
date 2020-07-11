@@ -137,7 +137,7 @@ export function getAvatarApi(avatarName){
     });
 }
 
-export function updateUser(token,user, userId){
+export function updateUserApi(token,user, userId){
     const url = `${basePath}/${apiVersion}/update-user/${userId}`;
     const params = {
         method : "PUT",
