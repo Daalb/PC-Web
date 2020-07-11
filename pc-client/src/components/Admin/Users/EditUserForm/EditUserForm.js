@@ -19,7 +19,6 @@ export default function EditUserForm(props){
     const [avatar,setAvatar] = useState(null);
     const [userData, setUserData] = useState({});
 
-
     useEffect(()=>{
         setUserData({
             nombre: user.nombre,
@@ -28,13 +27,12 @@ export default function EditUserForm(props){
             phone: user.phone,
             carrera: user.carrera,
             role: user.role,
-            avatar: user.avatar
-        })
+            avatar: user.avatar,
+            password:"",
+            repeatPassword: ""
+         });
     },[user]);
-
-
-
-
+   
 
     useEffect(()=>{
         if (user.avatar) {
@@ -44,7 +42,7 @@ export default function EditUserForm(props){
         } else {
             setAvatar(null);
         }
-    },[user])
+    },[user]);
 
     useEffect(()=> {
         if(avatar) {
@@ -65,16 +63,15 @@ export default function EditUserForm(props){
                 return;
             } else {
                 delete userUpdate.repeatPassword;
-            }
-           
-        }
+            };
+        };
 
         if (!userUpdate.nombre || !userUpdate.lastName || !userUpdate.email) {
             notification["error"]({
                 message: "El nombre, apellido y email son obligatorios"
             })
             return;
-        }
+        };
 
         if (typeof(userUpdate.avatar) === "object") {
             uploadAvatarApi(token, userUpdate.avatar, user._id).then(response =>{
@@ -84,7 +81,7 @@ export default function EditUserForm(props){
                         message: result.message
                     });
                     setIsVisibleModal(false);
-                    setReloadUsers(true);
+                    setReloadUsers(true); 
                 });
             });
         } else {
@@ -93,14 +90,12 @@ export default function EditUserForm(props){
                     message: result.message
                 });
                 setIsVisibleModal(false);
-                setReloadUsers(true);
-
+                setReloadUsers(true); 
             });
-        }
+        };
 
     };
     
-
     return(
         <div className="edit-user-form">
             <UploadAvatar avatar={avatar} setAvatar={setAvatar}></UploadAvatar>
@@ -235,6 +230,7 @@ function EditForm(props){
                             prefix= {<FileOutlined />}
                             type="password"
                             placeholder="Contraseña"
+                            value={userData.password}
                             onChange={e => setUserData({...userData, password: e.target.value})}
                         />
                     </Form.Item>
@@ -246,6 +242,7 @@ function EditForm(props){
                             prefix= {<FileOutlined />}
                             type="password"
                             placeholder="Repetir contraseña"
+                            value={userData.repeatPassword}
                             onChange={e => setUserData({...userData, repeatPassword: e.target.value})}
                         />
                     </Form.Item>
@@ -261,4 +258,4 @@ function EditForm(props){
 
         </Form>
     );
-}
+};

@@ -20,7 +20,7 @@ function signUp(req, res){
     user.lastName = lastName; 
     user.email = email.toLowerCase();
     user.phone = phone;
-    user.carrera = carrera;
+    user.carrera = carrera.toLowerCase();
     user.role = "admin";
     user.active = false;
 
@@ -99,6 +99,7 @@ function getUsers(req,res){
             res.status(404).send({message: "No se ha encontrado ningún usuario."})
         } else {
             res.status(200).send({users})
+            console.log(users)
         }
     }); 
 }
