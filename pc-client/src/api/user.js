@@ -137,7 +137,7 @@ export function getAvatarApi(avatarName){
     });
 }
 
-export function updateUserApi(token,user, userId){
+export function updateUserApi(token, user, userId){
     const url = `${basePath}/${apiVersion}/update-user/${userId}`;
     const params = {
         method : "PUT",
@@ -156,4 +156,29 @@ export function updateUserApi(token,user, userId){
         return err.message;
     })
 
+}
+
+export function activateUserApi(token, userId, status){
+    const url = `${basePath}/${apiVersion}/activate-user/${userId}`;
+    const params = {
+        method: "PUT",
+        headers: {
+            "Content-Type":"application/json",
+            Authorization: token
+        },
+        body: JSON.stringify({
+            active: status
+        })
+    };
+    
+    return fetch(url,params)
+    .then(response => {
+        return response.json;
+    })
+    .then(result => {
+        return result.message;
+    })
+    .catch(err => {
+        return err.message
+    })
 }
