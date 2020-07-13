@@ -206,6 +206,27 @@ async function updateUser(req,res){
     
 }
 
+function activateUser(req,res){
+    const { id } = req.params;
+    const { active } = req.body;
+    
+    User.findByIdAndUpdate(id, { active }, (err,userStored) =>{
+        if (err) {
+            res.status(500).send({message: "Error de servidor."});
+        } else {
+            if (!userStored) {
+                res.status(404).send({message: "No se ha encontrado el usuario"});
+            } else {
+                if (active === true) {
+                    res.status(200).send({message: "El usuario ha sido activado correctamente."});
+                } else {
+                    res.status(200).send({message: "El usuario se ha desactivado correctamente."});
+                }
+            }
+        }
+    });
+}
+
 module.exports = {
     signUp,
     singIn,
@@ -213,6 +234,7 @@ module.exports = {
     getUsersActive,
     uploadAvatar,
     getAvatar,
-    updateUser
+    updateUser,
+    activateUser
 
 };

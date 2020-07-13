@@ -17,9 +17,7 @@ export default function ListUsers(props){
     const [modalContent, setModalContent] = useState("");
     
     
-    //console.log(usersInactive);
-    //Comentario de prueb   
-    //Comentario de prueba 2
+    
    
     return(
         

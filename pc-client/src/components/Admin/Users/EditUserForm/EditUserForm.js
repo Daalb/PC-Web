@@ -7,9 +7,10 @@ import { UserOutlined, MailOutlined, PhoneOutlined, FileOutlined } from '@ant-de
 //Imagenes
 import NoAvatar from '../../../../assets/img/png/no-avatar.png';
 
-//Componentes
+//Componentes y Funciones
 import { getAvatarApi, uploadAvatarApi, updateUserApi } from '../../../../api/user';
 import { getAccessTokenApi } from '../../../../api/auth';
+import { minLengthValidation } from '../../../../utils/formValidation';
 
 import './EditUserForm.scss';
 
@@ -28,7 +29,7 @@ export default function EditUserForm(props){
             carrera: user.carrera,
             role: user.role,
             avatar: user.avatar,
-            password:"",
+            password: "",
             repeatPassword: ""
          });
     },[user]);
@@ -150,6 +151,30 @@ function EditForm(props){
     const { userData, setUserData, updateUser} = props;
     const { Option } = Select;
 
+
+
+   /* const changeForm = e =>{
+
+        setUserData({
+            ...userData,
+            [e.target.name]: e.target.value,
+        });
+             
+    };*/
+
+
+    /*const inputValidation = e => {
+        const { name } = e.target;
+        console.log(e.target);
+            setUserData({
+               ...userData,
+               [name]: minLengthValidation(e.target,6) 
+            });
+        
+    }*/
+
+
+
     return(
         <Form className="form-edit" onFinish={updateUser}>
             <Row gutter={24}>
@@ -223,14 +248,15 @@ function EditForm(props){
                 </Col>
             </Row>
 
-            <Row gutter={24}>
+            <Row gutter={24} >
                 <Col span={12}>
-                    <Form.Item>
-                        <Input
+                    <Form.Item > 
+                        <Input 
                             prefix= {<FileOutlined />}
                             type="password"
                             placeholder="Contraseña"
-                            value={userData.password}
+                            //value={userData.password}
+                            //onChange={inputValidation}
                             onChange={e => setUserData({...userData, password: e.target.value})}
                         />
                     </Form.Item>
@@ -242,7 +268,6 @@ function EditForm(props){
                             prefix= {<FileOutlined />}
                             type="password"
                             placeholder="Repetir contraseña"
-                            value={userData.repeatPassword}
                             onChange={e => setUserData({...userData, repeatPassword: e.target.value})}
                         />
                     </Form.Item>
