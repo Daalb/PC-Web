@@ -243,6 +243,44 @@ function deleteUser(req,res){
     });
 }
 
+function signUpAdmin(req,res){
+    const user = new User();
+
+    const { nombre, lastName, email, password, phone, carrera, role } = req.body;
+    user.nombre = nombre;
+    user.lastName = lastName; 
+    user.email = email.toLowerCase();
+    user.phone = phone;
+    user.carrera = carrera.toLowerCase();
+    user.role = role;
+    user.active = true; //Creación de usuarios desde panel de admin siempre activos
+
+    if (!password) {
+        res.status(500).send({message: "La contraseña es obligatoria"})
+    } else{ 
+        bcrypt.hash(password,null,null, (err,hash) => {
+            if (err) {
+                res.status(500).send({message: "Error al encriptar contraseña."})
+            } else {
+                user.password = hash;
+
+                user.save((err,userStored) => {
+                    if (err) {
+                        res.status(500).send({message: "El usuario ya existe."});
+                    } else {
+                        if (!userStored) {
+                            res.status(500).send({message: "Error al crear el nuevo usuario."});
+                        } else {
+                            res.status(200).send({user: userStored});
+                        }
+                    }
+                }) 
+            }
+        });
+    }
+
+   
+}
 
 module.exports = {
     signUp,
@@ -253,6 +291,7 @@ module.exports = {
     getAvatar,
     updateUser,
     activateUser,
-    deleteUser
+    deleteUser,
+    signUpAdmin
 
 };
