@@ -49,19 +49,42 @@ export default function ListUsers(props){
         })
     };
     
-   
+    
+    const addUserModal = () => {
+        setIsVisibleModal(true);
+        setModalTitle("Creando nuevo usuario");
+        setModalContent(<div>
+            <h1>Formulario de creación de usuario</h1>
+            <h2>Admin</h2>
+        </div>);
+    }
+
+
     return(
         
         <div className='list-users'>
-            <div className='list-users__switch'>
-                <Switch
-                    defaultChecked
-                    onChange={()=>setViewUsersActive(!viewUsersActive)}
-                />
-                <span>
-                    {viewUsersActive ? "Usuarios Activos" : "Usuarios Inactivos"}
-                </span>
+
+
+            <div className="list-users__header">
+                <div className='list-users__header-switch'>
+                    <Switch
+                        defaultChecked
+                        onChange={()=>setViewUsersActive(!viewUsersActive)}
+                    />
+                    <span>
+                        {viewUsersActive ? "Usuarios Activos" : "Usuarios Inactivos"}
+                    </span>
+                </div>
+
+                <Button type="primary" onClick={addUserModal}>
+                    Nuevo Usuario
+                </Button>
             </div>
+            
+          
+
+
+
             {viewUsersActive ? <UsersActive 
             usersActive={usersActive} 
             setIsVisibleModal={setIsVisibleModal}
