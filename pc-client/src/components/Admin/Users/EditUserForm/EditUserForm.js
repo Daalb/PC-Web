@@ -2,7 +2,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Avatar, Form, Input, Select, Button, Row, Col, notification } from 'antd';
-import { UserOutlined, MailOutlined, PhoneOutlined, FileOutlined } from '@ant-design/icons';
+import { UserOutlined, MailOutlined, PhoneOutlined, FileOutlined, LockOutlined  } from '@ant-design/icons';
 
 //Imagenes
 import NoAvatar from '../../../../assets/img/png/no-avatar.png';
@@ -252,7 +252,7 @@ function EditForm(props){
                 <Col span={12}>
                     <Form.Item > 
                         <Input 
-                            prefix= {<FileOutlined />}
+                            prefix= {<LockOutlined />}
                             type="password"
                             placeholder="Contraseña"
                             //value={userData.password}
@@ -265,7 +265,7 @@ function EditForm(props){
                 <Col span={12}>
                     <Form.Item>
                         <Input
-                            prefix= {<FileOutlined />}
+                            prefix= {<LockOutlined />}
                             type="password"
                             placeholder="Repetir contraseña"
                             onChange={e => setUserData({...userData, repeatPassword: e.target.value})}

@@ -6,7 +6,8 @@ import { EditOutlined, StopOutlined, DeleteOutlined, CheckOutlined } from '@ant-
 //Componentes y Funciones
 import NoAvatar from '../../../../assets/img/png/no-avatar.png';
 import Modal from '../../../Modal';
-import EditUserForm from '../EditUserForm/EditUserForm';
+import EditUserForm from '../EditUserForm';
+import AddUserForm from '../AddUserForm';
 import { getAvatarApi, activateUserApi, deleteUserApi } from '../../../../api/user';
 import { getAccessTokenApi } from '../../../../api/auth';
 
@@ -53,10 +54,12 @@ export default function ListUsers(props){
     const addUserModal = () => {
         setIsVisibleModal(true);
         setModalTitle("Creando nuevo usuario");
-        setModalContent(<div>
-            <h1>Formulario de creación de usuario</h1>
-            <h2>Admin</h2>
-        </div>);
+        setModalContent(
+            <AddUserForm 
+                setIsVisibleModal={setIsVisibleModal} 
+                setReloadUsers={setReloadUsers}
+            />
+        );
     }
 
 
