@@ -174,6 +174,7 @@ function UserInactive(props){
 
     const activateUser = () => {
         const accessToken = getAccessTokenApi();
+        
         activateUserApi(accessToken, user._id, true)
         .then(response => {
             notification["success"]({

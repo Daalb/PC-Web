@@ -173,12 +173,12 @@ export function activateUserApi(token, userId, status){
     
     return fetch(url,params)
     .then(response => {
-        return response.json;
+        return response.json();
     })
     .then(result => {
         return result.message;
     })
     .catch(err => {
-        return err.message
-    })
+        return err.message;
+    });
 }
