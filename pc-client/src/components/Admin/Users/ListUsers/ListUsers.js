@@ -1,17 +1,19 @@
 //Liberias
 import React,{ useState, useEffect } from 'react';
-import { Switch, List, Avatar, Button, notification } from 'antd';
+import { Switch, List, Avatar, Button, notification, Modal as ModalAntd } from 'antd';
 import { EditOutlined, StopOutlined, DeleteOutlined, CheckOutlined } from '@ant-design/icons';
 
 //Componentes y Funciones
 import NoAvatar from '../../../../assets/img/png/no-avatar.png';
 import Modal from '../../../Modal';
 import EditUserForm from '../EditUserForm/EditUserForm';
-import { getAvatarApi, activateUserApi } from '../../../../api/user';
+import { getAvatarApi, activateUserApi, deleteUserApi } from '../../../../api/user';
 import { getAccessTokenApi } from '../../../../api/auth';
 
 //Estilos
 import './ListUsers.scss';
+
+const { confirm } = ModalAntd;
 
 export default function ListUsers(props){
     const { usersActive, usersInactive, setReloadUsers } = props;
@@ -19,8 +21,33 @@ export default function ListUsers(props){
     const [isVisibleModal,setIsVisibleModal] = useState(false);
     const [modalTitle, setModalTitle] = useState("");
     const [modalContent, setModalContent] = useState("");
-    
-    
+    console.log(props);
+     
+    const showDeleteConfirm = (nombre,apellido,id) => {
+        const accessToken = getAccessTokenApi();
+
+        confirm({
+            title: "Eliminado usuario",
+            content: `¿Estás seguro que quieres elimar a ${nombre} ${apellido}?`,
+            okText: "Eliminar",
+            okType: "danger",
+            cancelText: "Cancelar",
+            onOk() {
+                deleteUserApi(accessToken, id)
+                .then(response => {
+                    notification["success"]({
+                        message: response
+                    });
+                    setReloadUsers(true);
+                })
+                .catch(err => {
+                    notification["error"]({
+                        message: err
+                    });
+                });
+            }
+        })
+    };
     
    
     return(
@@ -42,7 +69,9 @@ export default function ListUsers(props){
             setModalContent={setModalContent}
             setReloadUsers={setReloadUsers}
             
-            /> : <UsersInactive usersInactive={usersInactive} setReloadUsers={setReloadUsers}/> }
+            /> : <UsersInactive usersInactive={usersInactive} 
+                setReloadUsers={setReloadUsers} 
+                showDeleteConfirm={showDeleteConfirm}/> }
 
             <Modal
                 title= {modalTitle} 
@@ -103,7 +132,31 @@ function UserActive(props){//Renderiza un UNICO usuario
         })
     };
 
+    const showDeleteConfirm = () => {
+        const accessToken = getAccessTokenApi();
 
+        confirm({
+            title: "Eliminado usuario",
+            content: `¿Estás seguro que quieres elimar a ${user.nombre} ${user.lastName}?`,
+            okText: "Eliminar",
+            okType: "danger",
+            cancelText: "Cancelar",
+            onOk() {
+                deleteUserApi(accessToken, user._id)
+                .then(response => {
+                    notification["success"]({
+                        message: response
+                    });
+                    setReloadUsers(true);
+                })
+                .catch(err => {
+                    notification["error"]({
+                        message: err
+                    });
+                });
+            }
+        })
+    };
 
 
     return (
@@ -125,7 +178,7 @@ function UserActive(props){//Renderiza un UNICO usuario
 
                      <Button
                         type='danger'
-                        onClick={()=>console.log("Eliminar Usuario")}
+                        onClick={showDeleteConfirm}
                     >  
                         <DeleteOutlined />
                     </Button>
@@ -145,19 +198,21 @@ function UserActive(props){//Renderiza un UNICO usuario
 }
 
 function UsersInactive(props){
-    const { usersInactive, setReloadUsers } = props;
+    const { usersInactive, setReloadUsers, showDeleteConfirm } = props;
     return(
         <List
          className='users-active'
          itemLayout='horizontal'
          dataSource={usersInactive}
-         renderItem={user => <UserInactive user={user} setReloadUsers={setReloadUsers}/>}
+         renderItem={user => <UserInactive user={user} 
+                             setReloadUsers={setReloadUsers}
+                             showDeleteConfirm={showDeleteConfirm}/>}
         />
      );
 }
 
 function UserInactive(props){
-    const { user,setReloadUsers } = props;
+    const { user,setReloadUsers, showDeleteConfirm } = props;
     const [avatar, setAvatar] = useState(null);
 
     useEffect(()=>{
@@ -188,7 +243,10 @@ function UserInactive(props){
             });
         })
     };
- 
+    
+   
+
+
     return(
         <List.Item
             actions={[
@@ -201,7 +259,7 @@ function UserInactive(props){
 
                 <Button
                     type='danger'
-                    onClick={()=>console.log("Eliminar Usuario")}
+                    onClick={showDeleteConfirm(user.nombre,user.lastName,user._id)}
                 >  
                     <DeleteOutlined />
                 </Button>
