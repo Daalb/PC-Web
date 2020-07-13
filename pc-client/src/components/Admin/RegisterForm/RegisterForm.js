@@ -76,7 +76,7 @@ export default function RegisterForm(){
         const passwordVal = inputs.password;
         const repeatPasswordVal = inputs.repeatPassword;
 
-        if (!inputs.nombre || !passwordVal || !repeatPasswordVal || !inputs.privacyPolicy || !inputs.carrera || !inputs.phone || !inputs.lastName) {
+        if (!inputs.nombre || !passwordVal || !repeatPasswordVal || !inputs.privacyPolicy || !inputs.carrera  || !inputs.lastName) {
             notification['error']({
                 message: "Todos los campos son obligatorios"
             });

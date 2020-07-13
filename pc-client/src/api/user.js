@@ -227,5 +227,5 @@ export function signUpAdminApi(token, data){
     })
     .catch(err => {
         return err.message;
-    })
+    });
 }
