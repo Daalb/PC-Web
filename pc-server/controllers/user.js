@@ -229,11 +229,11 @@ function activateUser(req,res){
 
 function deleteUser(req,res){
     const { id } = req.params;
-    User.findByIdAndDelete(id,(err, userStored) => {
+    User.findByIdAndDelete(id,(err, userDeleted) => {
         if (err) {
             res.status(500).send({message: "Error de servidor."});
         } else {
-            if (!userStored) {
+            if (!userDeleted) {
                 res.status(404).send({message: "No se ha encontrado el usuario."})
             } else {
                 
