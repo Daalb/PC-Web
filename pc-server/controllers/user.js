@@ -215,7 +215,7 @@ function activateUser(req,res){
             res.status(500).send({message: "Error de servidor."});
         } else {
             if (!userStored) {
-                res.status(404).send({message: "No se ha encontrado el usuario"});
+                res.status(404).send({message: "No se ha encontrado el usuario."});
             } else {
                 if (active === true) {
                     res.status(200).send({message: "El usuario ha sido activado correctamente."});
@@ -227,6 +227,23 @@ function activateUser(req,res){
     });
 }
 
+function deleteUser(req,res){
+    const { id } = req.params;
+    User.findByIdAndDelete(id,(err, userStored) => {
+        if (err) {
+            res.status(500).send({message: "Error de servidor."});
+        } else {
+            if (!userStored) {
+                res.status(404).send({message: "No se ha encontrado el usuario."})
+            } else {
+                
+                res.status(200).send({message: "El usuario se ha elimando."})
+            }
+        }
+    });
+}
+
+
 module.exports = {
     signUp,
     singIn,
@@ -235,6 +252,7 @@ module.exports = {
     uploadAvatar,
     getAvatar,
     updateUser,
-    activateUser
+    activateUser,
+    deleteUser
 
 };

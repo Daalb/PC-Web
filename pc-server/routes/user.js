@@ -16,5 +16,6 @@ api.put("/upload-avatar/:id",[md_auth.ensureAuth, md_upload_avatar],UserControll
 api.get("/get-avatar/:avatarName",UserController.getAvatar);//Cualquier usuario puede ver el avatar aunque no esté logeado
 api.put("/update-user/:id", [md_auth.ensureAuth],UserController.updateUser);
 api.put("/activate-user/:id",[md_auth.ensureAuth],UserController.activateUser);
+api.delete("/delete-user/:id",[md_auth.ensureAuth],UserController.deleteUser);
 
 module.exports = api;
