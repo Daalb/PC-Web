@@ -21,7 +21,7 @@ export default function ListUsers(props){
     const [isVisibleModal,setIsVisibleModal] = useState(false);
     const [modalTitle, setModalTitle] = useState("");
     const [modalContent, setModalContent] = useState("");
-    console.log(props);
+    
      
     const showDeleteConfirm = (nombre,apellido,id) => {
         const accessToken = getAccessTokenApi();
@@ -68,6 +68,7 @@ export default function ListUsers(props){
             setModalTitle={setModalTitle}
             setModalContent={setModalContent}
             setReloadUsers={setReloadUsers}
+            showDeleteConfirm={showDeleteConfirm}
             
             /> : <UsersInactive usersInactive={usersInactive} 
                 setReloadUsers={setReloadUsers} 
@@ -83,7 +84,7 @@ export default function ListUsers(props){
 }
 
 function UsersActive(props){//Renderiza varios usuarios
-    const { usersActive, setIsVisibleModal, setModalTitle, setModalContent, setReloadUsers } = props;
+    const { usersActive, setIsVisibleModal, setModalTitle, setModalContent, setReloadUsers, showDeleteConfirm } = props;
 
     const editUser = (user) =>{
         setIsVisibleModal(true);
@@ -97,13 +98,17 @@ function UsersActive(props){//Renderiza varios usuarios
             className='users-active'
             itemLayout='horizontal'
             dataSource={usersActive}
-            renderItem={user => <UserActive user={user} editUser={editUser} setReloadUsers={setReloadUsers}/>}
+            renderItem={user => <UserActive user={user} 
+                editUser={editUser} 
+                setReloadUsers={setReloadUsers}
+                showDeleteConfirm={showDeleteConfirm}
+               />}
         />
     );
 }
 
 function UserActive(props){//Renderiza un UNICO usuario
-    const {user, editUser, setReloadUsers} = props;
+    const {user, editUser, setReloadUsers, showDeleteConfirm} = props;
     const [avatar, setAvatar] = useState(null);
 
     useEffect(()=>{
@@ -132,32 +137,9 @@ function UserActive(props){//Renderiza un UNICO usuario
         })
     };
 
-    const showDeleteConfirm = () => {
-        const accessToken = getAccessTokenApi();
-
-        confirm({
-            title: "Eliminado usuario",
-            content: `¿Estás seguro que quieres elimar a ${user.nombre} ${user.lastName}?`,
-            okText: "Eliminar",
-            okType: "danger",
-            cancelText: "Cancelar",
-            onOk() {
-                deleteUserApi(accessToken, user._id)
-                .then(response => {
-                    notification["success"]({
-                        message: response
-                    });
-                    setReloadUsers(true);
-                })
-                .catch(err => {
-                    notification["error"]({
-                        message: err
-                    });
-                });
-            }
-        })
-    };
-
+    const confirm = ()=> {
+        showDeleteConfirm(user.nombre,user.lastName,user._id);
+   }
 
     return (
         <List.Item
@@ -178,7 +160,7 @@ function UserActive(props){//Renderiza un UNICO usuario
 
                      <Button
                         type='danger'
-                        onClick={showDeleteConfirm}
+                        onClick={confirm}
                     >  
                         <DeleteOutlined />
                     </Button>
@@ -204,9 +186,7 @@ function UsersInactive(props){
          className='users-active'
          itemLayout='horizontal'
          dataSource={usersInactive}
-         renderItem={user => <UserInactive user={user} 
-                             setReloadUsers={setReloadUsers}
-                             showDeleteConfirm={showDeleteConfirm}/>}
+         renderItem={user => <UserInactive user={user} setReloadUsers={setReloadUsers} showDeleteConfirm={showDeleteConfirm} />}
         />
      );
 }
@@ -244,7 +224,9 @@ function UserInactive(props){
         })
     };
     
-   
+   const confirm = ()=> {
+        showDeleteConfirm(user.nombre,user.lastName,user._id);
+   }
 
 
     return(
@@ -259,7 +241,7 @@ function UserInactive(props){
 
                 <Button
                     type='danger'
-                    onClick={showDeleteConfirm(user.nombre,user.lastName,user._id)}
+                    onClick={confirm}
                 >  
                     <DeleteOutlined />
                 </Button>
