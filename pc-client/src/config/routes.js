@@ -7,6 +7,7 @@ import LayoutBasic from '../layouts/LayoutBasic';
 import AdminHome from '../pages/Admin'; //Como es exportación default le puedo poner cualquier nombre
 import AdminSignIn from '../pages/Admin/SignIn';
 import AdminUsers from '../pages/Admin/Users';
+import AdminMenuWeb from '../pages/Admin/MenuWeb';
 
 //Client Pages
 import Contact from '../pages/Contact';
@@ -35,6 +36,11 @@ const routes = [//Es el sistema de rutas, el array contiene todas las rutas
             {
                 path: "/admin/users",
                 component: AdminUsers,
+                exact: true
+            },
+            {
+                path:"/admin/menu",
+                component: AdminMenuWeb,
                 exact: true
             },
             {
