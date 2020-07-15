@@ -24,13 +24,13 @@ export default function AddUserForm(props) {
             const accessToken = getAccessTokenApi();
             signUpAdminApi(accessToken, userData)
             .then(response => {
-                notification["success"]({message: response})
+                notification["success"]({message: response});
                 setIsVisibleModal(false);
                 setReloadUsers(true);
                 setUserData({});//Resetear el formulario
             })
             .catch(err => {
-                notification["error"]({message: err})
+                notification["error"]({message: err});
             });
         }
     }
