@@ -28,9 +28,7 @@ export default function EditUserForm(props){
             phone: user.phone,
             carrera: user.carrera,
             role: user.role,
-            avatar: user.avatar,
-            password: "",
-            repeatPassword: ""
+            avatar: user.avatar
          });
     },[user]);
    
@@ -62,6 +60,10 @@ export default function EditUserForm(props){
                     message: "Las contraseñas tienen que ser iguales"
                 });
                 return;
+            } else if (userUpdate.password.length<6){
+                notification["error"]({
+                    message:" Las contraseñas tiene que tener un mínimo de 6 carácteres."
+                });
             } else {
                 delete userUpdate.repeatPassword;
             };
@@ -152,26 +154,6 @@ function EditForm(props){
     const { Option } = Select;
 
 
-
-   /* const changeForm = e =>{
-
-        setUserData({
-            ...userData,
-            [e.target.name]: e.target.value,
-        });
-             
-    };*/
-
-
-    /*const inputValidation = e => {
-        const { name } = e.target;
-        console.log(e.target);
-            setUserData({
-               ...userData,
-               [name]: minLengthValidation(e.target,6) 
-            });
-        
-    }*/
 
 
 
