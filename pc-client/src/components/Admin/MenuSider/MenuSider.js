@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import {Layout, Menu} from 'antd';
-import {HomeOutlined, SolutionOutlined ,TeamOutlined, MenuOutlined}  from '@ant-design/icons';
+import {HomeOutlined, SolutionOutlined ,TeamOutlined, MenuOutlined, FundOutlined }  from '@ant-design/icons';
 
 import './MenuSider.scss';
 
@@ -31,6 +31,14 @@ import './MenuSider.scss';
                         <span className="nav-text">Menú</span>
                    </Link>
                </Menu.Item>
+
+               <Menu.Item key="/admin/attendance">
+                   <Link to="/admin/attendance">
+                        <FundOutlined />
+                        <span className="nav-text">Reuniones</span>
+                   </Link>
+               </Menu.Item>
+
 
            </Menu>
        </Sider>

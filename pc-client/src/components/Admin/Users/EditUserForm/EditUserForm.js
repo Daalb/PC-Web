@@ -10,7 +10,7 @@ import NoAvatar from '../../../../assets/img/png/no-avatar.png';
 //Componentes y Funciones
 import { getAvatarApi, uploadAvatarApi, updateUserApi } from '../../../../api/user';
 import { getAccessTokenApi } from '../../../../api/auth';
-import { minLengthValidation } from '../../../../utils/formValidation';
+
 
 import './EditUserForm.scss';
 

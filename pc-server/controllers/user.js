@@ -13,7 +13,7 @@ const User = require("../models/user");
 function signUp(req, res){
     const user = new User();
 
-    const{ nombre, lastName, email, password, repeatPassword, phone, carrera } = req.body;
+    const{ nombre, lastName, email, password, repeatPassword, phone, carrera, event } = req.body;
 
     //Asignaciones al modelo
     user.nombre = nombre;
@@ -23,6 +23,7 @@ function signUp(req, res){
     user.carrera = carrera.toLowerCase();
     user.role = "admin";
     user.active = false;
+    user.event = "asd";
 
     //console.log(req.body);
     
@@ -282,6 +283,10 @@ function signUpAdmin(req,res){
    
 }
 
+function getAttendance(req,res){
+    console.log("Estoy en asistencia");
+}
+
 module.exports = {
     signUp,
     singIn,
@@ -292,6 +297,6 @@ module.exports = {
     updateUser,
     activateUser,
     deleteUser,
-    signUpAdmin
-
+    signUpAdmin,
+    getAttendance
 };
