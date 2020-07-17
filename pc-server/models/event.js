@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const EventSchema = Schema({
     nombre: String,
     lugar: String,
-    fecha: Date, //Revisar el tipo date
+    fecha: Date, //Revisar el tipo date, registra la fecha formato Unix
     tipo: String,
     asistentes: {
         nombre: String,
