@@ -9,7 +9,7 @@ function setEvent(req, res){
     event.lugar = lugar;
     event.fecha = fecha;
     event.tipo = tipo;
-    event.asistentes.push(asistentes)
+    event.asistentes = asistentes
 
   // console.log(asistentes[0]); 
   /* event.asistentes.nombre = asistentes.nombre;
@@ -44,7 +44,13 @@ function addAssistant(req,res){
             if (!eventUpdate) {
                 res.status(404).send({message: "No se ha encontrado el evento."});
             } else {
-                eventUpdate.asistentes.push({"nombre":"Diego","apellido":"Albor","correo":"daalbo@uninorte.edu.co"});
+                let assistant = {nombre: eventData.nombre, apellido: eventData.apellido, correo: eventData.correo}
+                Event.findByIdAndUpdate({_id: params.id},{$push: {asistentes: assistant}}, (err) => {
+                    if (err) {
+                        res.status(500).send({message: "Error al agregar asistente."});
+                    }
+                }); 
+               
             }
         }
     });

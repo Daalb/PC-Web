@@ -7,7 +7,11 @@ const EventSchema = Schema({
     lugar: String,
     fecha: String, //DD/MM/AA- HH1:MM1 - HH2:MM2
     tipo: String,
-    asistentes:[Object]
+    asistentes:[{
+        nombre: String,
+        apellido: String,
+        correo: String 
+    }]
     
 });
 
