@@ -14,12 +14,7 @@ const UserSchema = Schema({
     carrera: String,
     role: String,
     active: Boolean,
-    avatar: String,
-    event:{
-        date: String,
-        hours: String,
-        place: String
-    }
+    avatar: String
 });
 
 module.exports = mongoose.model("User",UserSchema);

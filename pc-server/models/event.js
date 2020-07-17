@@ -5,9 +5,16 @@ const Schema = mongoose.Schema;
 const EventSchema = Schema({
     nombre: String,
     lugar: String,
-    fecha: String, //Revisar el tipo date
+    fecha: Date, //Revisar el tipo date
     tipo: String,
-    asistentes: String
+    asistentes: {
+        nombre: String,
+        apellido: String,
+        correo: {
+            type: String,
+            unique: true
+        }
+    }
     /*TO DO revisar como almacenar un objeto*/ 
 });
 
