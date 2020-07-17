@@ -10,10 +10,7 @@ const EventSchema = Schema({
     asistentes: {
         nombre: String,
         apellido: String,
-        correo: {
-            type: String,
-            unique: true
-        }
+        correo: String
     }
     /*TO DO revisar como almacenar un objeto*/ 
 });
