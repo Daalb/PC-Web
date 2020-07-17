@@ -33,6 +33,26 @@ function setEvent(req, res){
 }
 
 
+function addAssistant(req,res){
+    let eventData = req.body;
+    const params = req.params;
+
+    Event.findById({_id:params.id}, (err,eventUpdate) => {
+        if (err) {
+            res.status(500).send({message: "Error del servidor."});
+        } else {
+            if (!eventUpdate) {
+                res.status(404).send({message: "No se ha encontrado el evento."});
+            } else {
+                eventUpdate.asistentes.push({"nombre":"Diego","apellido":"Albor","correo":"daalbo@uninorte.edu.co"});
+            }
+        }
+    });
+
+}
+
+
 module.exports = {
-    setEvent
+    setEvent,
+    addAssistant
 };
