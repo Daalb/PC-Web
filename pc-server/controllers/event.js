@@ -9,9 +9,11 @@ function setEvent(req, res){
     event.lugar = lugar;
     event.fecha = fecha;
     event.tipo = tipo;
-    event.asistentes.nombre = asistentes.nombre;
+    event.asistentes.push(asistentes)
+   console.log(asistentes[0]); 
+  /* event.asistentes.nombre = asistentes.nombre;
     event.asistentes.apellido = asistentes.apellido;
-    event.asistentes.correo = asistentes.correo;
+   event.asistentes.correo = asistentes.correo;*/
 
     event.save((err,eventStored) => {
         if (err) {

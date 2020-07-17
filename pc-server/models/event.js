@@ -7,11 +7,7 @@ const EventSchema = Schema({
     lugar: String,
     fecha: Date, //Revisar el tipo date, registra la fecha formato Unix
     tipo: String,
-    asistentes: {
-        nombre: String,
-        apellido: String,
-        correo: String
-    }
+    asistentes:[Object]
     /*TO DO revisar como almacenar un objeto*/ 
 });
 
