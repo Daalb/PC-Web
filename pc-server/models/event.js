@@ -5,10 +5,10 @@ const Schema = mongoose.Schema;
 const EventSchema = Schema({
     nombre: String,
     lugar: String,
-    fecha: Date, //Revisar el tipo date, registra la fecha formato Unix
+    fecha: String, //DD/MM/AA- HH1:MM1 - HH2:MM2
     tipo: String,
     asistentes:[Object]
-    /*TO DO revisar como almacenar un objeto*/ 
+    
 });
 
 module.exports = mongoose.model("Event",EventSchema);

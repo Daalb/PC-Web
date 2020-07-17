@@ -10,13 +10,16 @@ function setEvent(req, res){
     event.fecha = fecha;
     event.tipo = tipo;
     event.asistentes.push(asistentes)
-   console.log(asistentes[0]); 
+
+  // console.log(asistentes[0]); 
   /* event.asistentes.nombre = asistentes.nombre;
     event.asistentes.apellido = asistentes.apellido;
    event.asistentes.correo = asistentes.correo;*/
 
+   
     event.save((err,eventStored) => {
         if (err) {
+            console.log(err);
             res.status(500).send({message: "El evento ya existe."});
         } else {
             if (!eventStored) {
