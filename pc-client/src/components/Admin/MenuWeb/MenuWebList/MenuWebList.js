@@ -6,6 +6,8 @@ import DragSortableList from 'react-drag-sortable';
 
 //Componentes y Funciones
 import Modal from '../../../Modal';
+import { updateMenuApi } from '../../../../api/menu';
+import { getAccessTokenApi } from '../../../../api/auth';
 
 //Estilos
 import './MenuWebList.scss';
@@ -34,7 +36,14 @@ export default function MenuWebList(props){
 
 
   const onSort = (sortedList, dropEvent) => {
-    console.log(sortedList);
+    const accessToken = getAccessTokenApi();
+
+    sortedList.forEach(item => {
+      const {_id} = item.content.props.item;
+      const order = item.rank;
+      updateMenuApi(accessToken,_id,{ order });
+
+    })
   }
 
   return(
