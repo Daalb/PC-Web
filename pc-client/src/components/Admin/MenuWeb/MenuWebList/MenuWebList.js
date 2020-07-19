@@ -6,7 +6,7 @@ import DragSortableList from 'react-drag-sortable';
 
 //Componentes y Funciones
 import Modal from '../../../Modal';
-import { updateMenuApi } from '../../../../api/menu';
+import { updateMenuApi, activateMenuApi } from '../../../../api/menu';
 import { getAccessTokenApi } from '../../../../api/auth';
 
 //Estilos
@@ -26,13 +26,24 @@ export default function MenuWebList(props){
     menu.forEach(item => {
       listItemArray.push({
         content: (
-         <MenuItem item={item} />
+         <MenuItem item={item} activateMenu={activateMenu} />
         )
       })
     });
     setListItem(listItemArray);
     
   },[menu])
+
+
+  const activateMenu = (menu,status) => {
+    const accessToken = getAccessTokenApi();
+    activateMenuApi(accessToken,menu._id, status)
+      .then(response => {
+        notification["success"]({
+          message: response 
+        })
+      }) 
+  }
 
 
   const onSort = (sortedList, dropEvent) => {
@@ -44,7 +55,7 @@ export default function MenuWebList(props){
       updateMenuApi(accessToken,_id,{ order });
 
     })
-  }
+  };
 
   return(
     <div className="menu-web-list">
@@ -60,11 +71,11 @@ export default function MenuWebList(props){
 
 
 function MenuItem(props){
-  const { item } = props;
+  const { item, activateMenu } = props;
   return(
     <List.Item 
       actions={[
-        <Switch defaultChecked={item.active}/>,
+        <Switch defaultChecked={item.active} onChange={e =>activateMenu(item,e)}/>,
         <Button type="primary">
           <EditOutlined />
         </Button>,
