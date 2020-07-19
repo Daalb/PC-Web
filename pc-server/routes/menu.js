@@ -6,6 +6,6 @@ const md_auth = require("../middleware/authenticated");
 
 const api = express.Router();
 
-api.post("/add-menu",[md_auth.ensureAuth,MenuController.addMenu]);
+api.post("/add-menu",[md_auth.ensureAuth],MenuController.addMenu);
 
 module.exports = api;
