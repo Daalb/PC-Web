@@ -10,12 +10,6 @@ function setEvent(req, res){
     event.fecha = fecha;
     event.tipo = tipo;
     event.asistentes = asistentes
-
-  // console.log(asistentes[0]); 
-  /* event.asistentes.nombre = asistentes.nombre;
-    event.asistentes.apellido = asistentes.apellido;
-   event.asistentes.correo = asistentes.correo;*/
-
    
     event.save((err,eventStored) => {
         if (err) {
@@ -48,6 +42,10 @@ function addAssistant(req,res){
                 Event.findByIdAndUpdate({_id: params.id},{$push: {asistentes: assistant}}, (err) => {
                     if (err) {
                         res.status(500).send({message: "Error al agregar asistente."});
+                    } else {
+                        if (assistant.correo === eventUpdate.assistant[correo]) {
+                            res.status(400).send({message: "Ya se agregó a este asistente."});
+                        }
                     }
                 }); 
                
