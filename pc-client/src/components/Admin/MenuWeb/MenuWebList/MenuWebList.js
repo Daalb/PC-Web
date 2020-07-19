@@ -57,14 +57,33 @@ export default function MenuWebList(props){
     })
   };
 
+
+  const addMenuWebModal = () => {
+    setIsVisibleModal(true);
+    setModalTitle("Creando nuevo menú");
+    setModalContent(
+      <div>
+        <h1>Creando Menú</h1>
+      </div>
+    );
+  };
+
   return(
     <div className="menu-web-list">
       <div className="menu-web-list__header"> 
-        <Button type="primary"> Menu menú </Button>
+        <Button type="primary" onClick={addMenuWebModal}> Crear menú </Button>
       </div>
       <div className="menu-web-list__items">
         <DragSortableList items={listItems} onSort={onSort} type="vertical"/>
       </div>
+
+      <Modal
+        title={modalTitle}
+        isVisible={isVisibleModal}
+        setIsVisible={setIsVisibleModal}
+      >
+        {modalContent}
+      </Modal>
     </div>
   );
 }
