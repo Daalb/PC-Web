@@ -1,7 +1,7 @@
 //Librerias
 import React, { useState, useEffect } from 'react';
 import {Switch, List, Button, Modal as ModalAntd, notification} from 'antd';
-import { UserOutlined }  from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined }  from '@ant-design/icons';
 import DragSortableList from 'react-drag-sortable';
 
 //Componentes y Funciones
@@ -19,14 +19,12 @@ export default function MenuWebList(props){
   const[modalTitle,setModalTitle] = useState("");
   const[modalContent,setModalContent] =useState(null);
   
-  console.log(listItems);
   useEffect(() =>{
     const listItemArray = [];
-    
     menu.forEach(item => {
       listItemArray.push({
         content: (
-          <div><p>{item.title}</p></div>
+         <MenuItem item={item} />
         )
       })
     });
@@ -41,12 +39,32 @@ export default function MenuWebList(props){
 
   return(
     <div className="menu-web-list">
-      <div className="mnu-web-list__header"> 
+      <div className="menu-web-list__header"> 
         <Button type="primary"> Menu menú </Button>
       </div>
       <div className="menu-web-list__items">
-        <DragSortableList></DragSortableList>
+        <DragSortableList items={listItems} onSort={onSort} type="vertical"/>
       </div>
     </div>
+  );
+}
+
+
+function MenuItem(props){
+  const { item } = props;
+  return(
+    <List.Item 
+      actions={[
+        <Switch defaultChecked={item.active}/>,
+        <Button type="primary">
+          <EditOutlined />
+        </Button>,
+        <Button type="danger">
+          <DeleteOutlined/>
+        </Button>
+
+      ]}>
+      <List.Item.Meta title={item.title} description={item.url} />
+    </List.Item>
   );
 }
