@@ -29,16 +29,19 @@ export default function LoginForm(){
         if (result.message) {
             notification["error"]({message:result.message});
         } else {
-            const { accessToken, refreshToken } = result;
-            localStorage.setItem(ACCESS_TOKEN,accessToken);
-            localStorage.setItem(REFRESH_TOKEN,refreshToken);
-
-            notification["success"]({message:"Login correcto"});
-
-            window.location.href="/admin";
-
-        }
+            if (result === "undefined") {
+                localStorage.clear();
+            } else {
+                const { accessToken, refreshToken } = result;
         
+                localStorage.setItem(ACCESS_TOKEN,accessToken);
+                localStorage.setItem(REFRESH_TOKEN,refreshToken);
+    
+                notification["success"]({message:"Login correcto"});
+    
+                window.location.href="/admin";
+            }
+        }
     }
 
 

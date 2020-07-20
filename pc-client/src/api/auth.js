@@ -5,9 +5,15 @@ import jwtDecode from "jwt-decode";
 export function getAccessTokenApi(){
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
 
-    if (!accessToken || accessToken === "null") {
-        return null;
-    } 
+    console.log(accessToken);
+    if (accessToken === undefined) {
+        localStorage.clear();
+    } else {
+        if (!accessToken || accessToken === "null" ) {
+            return null;
+        } 
+    }
+   
 
     return willExpireToken(accessToken) ? null : accessToken;
 
