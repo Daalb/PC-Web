@@ -29,7 +29,7 @@ export default function Events(){
             <Button key="1" type="primary">Editar Reunión</Button>,
           ]}
         />
-        <div class="Grid">
+        <div className="Grid">
           <List
               grid={{ gutter: 20, column: 4, justify: "center", align:"middle" }}
               pagination={{
