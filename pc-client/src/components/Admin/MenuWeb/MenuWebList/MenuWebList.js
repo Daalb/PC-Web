@@ -8,6 +8,7 @@ import DragSortableList from 'react-drag-sortable';
 import Modal from '../../../Modal';
 import { updateMenuApi, activateMenuApi } from '../../../../api/menu';
 import { getAccessTokenApi } from '../../../../api/auth';
+import AddMenuWebForm from '../AddMenuWebForm';
 
 //Estilos
 import './MenuWebList.scss';
@@ -63,7 +64,7 @@ export default function MenuWebList(props){
     setModalTitle("Creando nuevo menú");
     setModalContent(
       <div>
-        <h1>Creando Menú</h1>
+        <AddMenuWebForm/>
       </div>
     );
   };
