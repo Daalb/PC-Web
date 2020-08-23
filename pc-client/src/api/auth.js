@@ -5,7 +5,6 @@ import jwtDecode from "jwt-decode";
 export function getAccessTokenApi(){
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
 
-    console.log(accessToken);
     if (accessToken === undefined) {
         localStorage.clear();
     } else {
