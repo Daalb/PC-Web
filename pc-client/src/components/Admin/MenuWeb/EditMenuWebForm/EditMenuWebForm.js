@@ -8,7 +8,7 @@ import { getAccessTokenApi } from "../../../../api/auth";
 import "./EditMenuWebForm.scss"
 
 export default function EditMenuWebForm(props) {
-    const { setIsVisibleModal, setRoladMenuWeb, menu} = props;
+    const { setIsVisibleModal, setReloadMenuWeb, menu} = props;
     const [menuWebData, setMenuWebData] = useState(menu);
 
     useEffect( () => {
@@ -28,7 +28,7 @@ export default function EditMenuWebForm(props) {
                     message: response
                 })
                 setIsVisibleModal(false);
-                setRoladMenuWeb(true);
+                setReloadMenuWeb(true);
             })
             .catch( () => {
                 notification["error"]({
