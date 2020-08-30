@@ -9,27 +9,60 @@ import "./EditMenuWebForm.scss"
 
 export default function EditMenuWebForm(props) {
     const { setIsVisibleModal, setRoladMenuWeb, menu} = props;
+    const [menuWebData, setMenuWebData] = useState(menu);
+
+    useEffect( () => {
+        setMenuWebData(menu);
+    },[menu]);
+
+    const editMenu = e => {
+       if(!menuWebData.title || !menuWebData.url){
+           notification["error"]({
+               message: "Todos los campos son obligatorios."
+           })
+       } else {
+           const accessToken = getAccessTokenApi();
+           updateMenuApi(accessToken,menuWebData._id,menuWebData)
+            .then(response => {
+                notification["success"]({
+                    message: response
+                })
+                setIsVisibleModal(false);
+                setRoladMenuWeb(true);
+            })
+            .catch( () => {
+                notification["error"]({
+                    message: "Error del servidor,intentelo más tarde."
+                })
+            } )
+       }
+    }
 
     return(
         <div className="edit-menu-web-form">
-          <EditForm/>
+          <EditForm 
+            menuWebData={menuWebData}
+            setMenuWebData={setMenuWebData}
+            editMenu={editMenu}
+          />
         </div>
     );
 }
 
 
 function EditForm(props) {
-    //const {menuWebData, setMenuWebData, editMenu, menu} = props;
+    const {menuWebData, setMenuWebData, editMenu} = props;
+    
 
     return(
-        <Form className="form-edit">
+        <Form className="form-edit" onFinish={editMenu}>
 
             <Form.Item>
                 <Input
                     prefix= {<FontSizeOutlined/>}
                     placeholder="Titulo"
-                    //value={}
-                    //onChange={}
+                    value={menuWebData.title}
+                    onChange={e => setMenuWebData({...menuWebData, title:e.target.value})}
                 />
             </Form.Item>
 
@@ -37,8 +70,8 @@ function EditForm(props) {
                 <Input
                     prefix={<LinkOutlined />}
                     placeholder="URL"
-                    //value={}
-                    //onChange={}
+                    value={menuWebData.url}
+                    onChange={e => setMenuWebData({...menuWebData, url:e.target.value})}
                 />
             </Form.Item>
 
