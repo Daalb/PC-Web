@@ -1,5 +1,17 @@
 @import "../../../scss/index.scss";
 
 .home-fotos{
-    
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    &__title{
+        text-align: center;
+        
+        h2{
+            color: $font-parterns1;
+            font-weight: bold;
+            font-size: 32px;
+            text-transform: uppercase;
+        }
+    }
 }
