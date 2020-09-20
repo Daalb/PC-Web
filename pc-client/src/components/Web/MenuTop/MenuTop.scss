@@ -1,5 +1,5 @@
 @import "../../../scss/index.scss";
-.menu-top{
+.menu-top-web{
     position: sticky;
     top: 0;
     background-color: $background-home-web;
@@ -24,7 +24,7 @@
         padding: 10px;
 
         img{
-            width: 200px;
+            width: 50px;
         }
     }
 }
