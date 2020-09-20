@@ -12,10 +12,13 @@
         padding: 5px 8px;
         border-radius: 5px;
 
-        &.youtube{
+        &.facebook{
             background-color: $facebook;
         }
 
+        &.instagram{
+            background-color: $instagram;
+        }
         svg{
             width: 15px;
             height: 20px;
