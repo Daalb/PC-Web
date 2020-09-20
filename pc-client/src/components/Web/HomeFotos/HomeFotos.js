@@ -69,8 +69,9 @@ function CardFoto(props){
         <a href={link} target="_blank" >
             <Card
                 className="home-fotos__card"
-                cover={<img src={image} alt={title} />}
+                cover={<img src={image} alt={title} style={{height:200, width:200}}/>}
                 actions={[<Button>Ingresar</Button>]}
+                
             >
                 <Meta title={title} description={subtitle}/>
             </Card>
