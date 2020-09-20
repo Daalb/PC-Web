@@ -6,7 +6,7 @@ import DragSortableList from 'react-drag-sortable';
 
 //Componentes y Funciones
 import Modal from '../../../Modal';
-import { updateMenuApi, activateMenuApi } from '../../../../api/menu';
+import { updateMenuApi, activateMenuApi, deleteMenuApi } from '../../../../api/menu';
 import { getAccessTokenApi } from '../../../../api/auth';
 import AddMenuWebForm from '../AddMenuWebForm';
 import EditMenuWebForm from "../EditMenuWebForm";
@@ -28,7 +28,11 @@ export default function MenuWebList(props){
     menu.forEach(item => {
       listItemArray.push({
         content: (
-         <MenuItem item={item} activateMenu={activateMenu} editMenuWebModal={editMenuWebModal}/>
+         <MenuItem item={item} 
+          activateMenu={activateMenu} 
+          editMenuWebModal={editMenuWebModal} 
+          deleteMenu={deleteMenu}
+          />
         )
       })
     });
@@ -85,6 +89,31 @@ export default function MenuWebList(props){
     )
   }
 
+  const deleteMenu = menu => {
+   const accessToken = getAccessTokenApi();
+
+   confirm({
+    title: "Eliminando menú",
+    content: `Estas seguro de eliminar el mení ${menu.title}?`,
+    okText:"Eliminar",
+    okType: "danger",
+    cancelText: "Cancelar",
+    onOk() {
+      deleteMenuApi(accessToken, menu._id).then(response => {
+        notification["success"]({
+          message: response
+        });
+        setReloadMenuWeb(true)
+      }).catch( ()=> {
+        notification["error"]({
+          message: "Error del servidor, intentelo más tarde."
+        })
+      })
+    }
+   })
+
+  };
+
 
   return(
     <div className="menu-web-list">
@@ -108,7 +137,7 @@ export default function MenuWebList(props){
 
 
 function MenuItem(props){
-  const { item, activateMenu, editMenuWebModal } = props;
+  const { item, activateMenu, editMenuWebModal, deleteMenu } = props;
   return(
     <List.Item 
       actions={[
@@ -116,7 +145,7 @@ function MenuItem(props){
         <Button type="primary" onClick={() => editMenuWebModal(item)}>
           <EditOutlined />
         </Button>,
-        <Button type="danger">
+        <Button type="danger" onClick={() => deleteMenu(item)}>
           <DeleteOutlined/>
         </Button>
 
