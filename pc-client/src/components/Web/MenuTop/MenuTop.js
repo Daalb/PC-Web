@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 //Funciones
 import {getMenuApi} from "../../../api/menu"
 
+//Componentes
+import SocialLinks from "../SocialLinks";
+
 //Estilos
 import "./MenuTop.scss";
 import Logo from "../../../assets/img/png/logo-pcuninorte.png"
@@ -54,10 +57,8 @@ export default function MenuTop(){
                     </Menu.Item>
                 );
             })}
-            
-            <div>
-                Social Media...
-            </div>
+
+           <SocialLinks></SocialLinks>
         </Menu>
 
     )
