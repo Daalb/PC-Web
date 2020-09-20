@@ -15,17 +15,20 @@ export default function LayoutBasic({routes}){
 
     return(
         //El md puede ser reemplazado por lg
-        <Row>
-            <Col md={4}/> 
-            <Col md={16}>
-                <MenuTop/>
-                <LoadRoutes routes={routes} />
-                <Footer style={{ textAlign: 'center' }}>
-                    Partners Campus Uninorte
-                </Footer>
-            </Col>
-            <Col md={4}/>
-        </Row>
+        <>
+            
+            <Row>
+                <Col md={4}/> 
+                <Col md={16}>
+                    <MenuTop/>
+                </Col>
+                <Col md={4}/>
+            </Row>
+            <LoadRoutes routes={routes} />
+            <Footer style={{ textAlign: 'center' }}>
+                Partners Campus Uninorte
+            </Footer>
+        </>
     )
 }
 
